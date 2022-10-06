@@ -1,0 +1,52 @@
+
+
+.containerProductosFaker { 
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.productoItem{ 
+    width: 15rem;
+    height: 15rem;
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.nombreProducto{ 
+    font-family: "poppins", sans-serif;
+    font-size: 1.2rem;
+    margin: 5px 0px;
+    color: #1e1e1e;
+}
+
+.precioProducto{
+    font-family: "poppins", sans-serif;
+    font-size: 1rem;
+    margin: 5px 0px;
+    color: #1e1e1e;
+    color: rgb(255, 100, 83);
+}
+
+.tituloPagina{ 
+    text-align: center;
+    font-family: "poppins",sans-serif;
+    font-size: 2rem;
+    color: #1e1e1e;
+}
+
+.libreria{ 
+    color: rgb(255, 100, 83);
+}

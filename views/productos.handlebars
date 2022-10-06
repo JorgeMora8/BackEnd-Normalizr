@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../productos.js"></script>
+    <link rel="stylesheet" href="../css/productos.css">
+</head>
+<body>
+    <h1 class="tituloPagina">Lista de productos Random <span class="libreria">(Faker.Js)</span></h1>
+    <div class="containerProductosFaker">
+    {{#each productos}}
+            <div class="productoItem">
+            <h3 class="nombreProducto">{{nombre}}</h1>
+            <h4 class="precioProducto">{{precio}}</h2>
+            <img src={{imagen}} alt="imagen" width="200px">
+        </div>
+    {{/each}}
+        </div>
+</body>
+</html>
