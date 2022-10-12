@@ -1,49 +1,13 @@
-const express = require("express"); 
+const app = require("../app/app.js")
 const {Server:HttpServer} = require("http"); 
 const {Server:IOServer} = require("socket.io"); 
 const {schema, normalize} = require("normalizr")
+const ClienteMysql = require("../ContenedorMYSQL/ClienteMysql"); 
+const chatContenedor = require("../ContenedorMongoDB/DAOMongo.js")
+const messageSchema = require("../normalizr/NormalizrSchema.js")
 const PORT = 5000; 
-
-const app = express(); 
 const httpServer = new HttpServer(app); 
 const io = new IOServer(httpServer); 
-
-app.use(express.static("public")); 
-app.use(express.urlencoded({extended:true})); 
-app.use(express.json()); 
-
-
-//HandleBars SetUp
-const handlebarsConfig = {defaultlayout: "main.handlebars"}
-const {engine} = require("express-handlebars"); 
-app.engine("handlebars", engine(handlebarsConfig)); 
-app.set("view engine", ".handlebars"); 
-app.set("views", "./views");
-
-//=>Instalacion base de datos MYSQL; 
-const ClienteMysql = require("../ContenedorMYSQL/ClienteMysql"); 
-
-//=>Instalacion de contenedor MongoDB para su conexion y uso para el area de mensajes (DESAFIO NORMALIZR); 
-const contenedorMongoDB = require("../ContenedorMongoDB/Contenedor.js"); 
-const mensajeSchema = require("../ContenedorMongoDB/Config/mensajesSchema.js")
-const chatContenedor = new contenedorMongoDB(mensajeSchema)
-
-//=> Schemas
-const authorSchema = new schema.Entity("author", {idAttribute:"mail"})
-const messageSchema = new schema.Entity("mensaje", {
-    author: [authorSchema]}); 
-
-//=>Instalacion de routers; 
-const productosRouter = require("../router/Productos_test.js")
-app.use("/api/productosTest", productosRouter)
-
-
-
-
-
-
-
-
 
 
 
@@ -55,7 +19,38 @@ server.on("error", (err) => {
 })
 
 app.get("/", (req,res) => { 
-    res.render("home.handlebars", {productos:ClienteMysql.ObtenerProductos()})
+    if(req.session.nombre && req.session.email){
+    res.render("home.handlebars", {productos:ClienteMysql.ObtenerProductos(), nombre:req.session.nombre, email:req.session.email})}
+    else{ 
+        res.redirect("/login")
+    }
+})
+
+app.get("/login", (req,res)=>{ 
+        res.render("login.handlebars")
+})
+
+app.post("/login", (req,res)=>{ 
+    let datos = req.body
+    req.session.nombre = datos.nombre; 
+    req.session.email = datos.email; 
+
+
+    res.redirect("/")
+})
+
+app.get("/logout", (req,res)=>{ 
+    const nombre = req.session.nombre; 
+    if(!nombre)res.redirect("/login"); 
+    else { 
+        req.session.destroy((err) => { 
+            if(!err){ 
+                res.redirect("/login")
+            }else{ 
+                console.log(err)
+            }
+        })
+    }
 })
 
 

@@ -1,6 +1,9 @@
 
 const socket = io(); 
 
+
+
+
 //=> Función para limpiar los input; 
 const limpieza = () => { 
     document.getElementById("nombre").value = ""; 
@@ -89,8 +92,6 @@ const messages = normalizr.denormalize(data.result, [messageSchema], data.entiti
         )
     }).join(" "); 
     document.getElementById("chatContenedor").innerHTML = html; 
-
-   console.log(messages)
 } 
 
 socket.on("productos", (data) => {

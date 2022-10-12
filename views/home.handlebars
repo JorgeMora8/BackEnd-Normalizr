@@ -12,8 +12,15 @@
 </head>
 <body>
 
-      <h1 class="titulo">bienvenido</h1>
-      <p class="tituloMensaje">Agregar productos a tu lista !!</p>
+
+      <h1 class="titulo">bienvenido {{{nombre}}}</h1>
+      <div class="infoLogIn">
+         <h3 class="correoLogIn">Tu correo es: {{{email}}}</h3>
+      <form action="/logout" method="get" id="btnLogout">
+       <button type="submit" value="submit" class="btnLogOut">Desloguearse</button>
+      </form> 
+      </div>
+
     <div class="formularioContainer">
         <form onsubmit="return agregarProducto(this)">
             <input type="text" id="nombre" placeholder="Nombre del producto..." class="input">
@@ -28,8 +35,8 @@
 
 
  <h1 class="titulo">Centro de mensajes</h1>
- <div class="formularioContainer">
-        <form onsubmit="return agregarMensaje(this)">
+ <div class="formularioMensajes">
+        <form onsubmit="return agregarMensaje(this)" class="formulario">
             <input type="text" id="nombreMensaje" placeholder="Ingresa tu nombre..." class="input">
             <input type="text" id="apellidoMensaje" placeholder="Ingresa tu Apellido..." class="input">
              <input type="text" id="edadMensaje" placeholder="Ingresa tu edad..." class="input">
